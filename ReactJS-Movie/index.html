@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactJs</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const Counter = () => {
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () =>{
+            setCounter(current => current + 1)
+        }
+        return (<div>
+            <h3>Total clicks: {counter}</h3>
+            <button onClick = {onClick}>
+                Click Me
+            </button>
+        </div>)
+    }
+
+    const TimeConverter = () => {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = ({target}) => {
+            setAmount(target.value);
+        }
+        const onFlip = () => {
+            setFlipped(current => !current)
+            setAmount(0)
+        }
+        return (
+            <div>
+                <label htmlFor="m">Minutes</label>
+                <input 
+                    value={flipped? amount * 60 : amount} 
+                    id="m" 
+                    placeholder = "mins" 
+                    type="number"
+                    onChange={onChange}
+                    disabled={flipped}
+                />
+                <h4> You want to convert {amount} </h4>
+                <label htmlFor="h">Hours</label>
+                <input 
+                    value={flipped? amount : Math.round(amount/60)} 
+                    id="h" 
+                    placeholder = "hours"
+                    type="number"
+                    onChange={onChange}
+                    disabled={!flipped}
+                />
+                <br></br>
+                <button onClick={()=> setAmount(0)}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+            </div>
+        )
+    }
+
+    const DistanceConverter = () => {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = ({target}) => {
+            setAmount(target.value);
+        }
+        const onFlip = () => {
+            setFlipped(current => !current)
+            setAmount(0)
+        }
+        return (
+            <div>
+                <label htmlFor="m">Miles</label>
+                <input 
+                    value={flipped? Math.round(amount/1.6): amount} 
+                    id="m" 
+                    placeholder = "miles" 
+                    type="number"
+                    onChange={onChange}
+                    disabled={flipped}
+                />
+                <h4> You want to convert {amount} </h4>
+                <label htmlFor="k">Km</label>
+                <input 
+                    value={flipped? amount : amount * 1.6} 
+                    id="k" 
+                    placeholder = "kilometer"
+                    type="number"
+                    onChange={onChange}
+                    disabled={!flipped}
+                />
+                <br></br>
+                <button onClick={()=> setAmount(0)}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+            </div>
+        )
+    }
+    const SuperConverter = () => {
+        const [index, setIndex] = React.useState("xx");
+        const onChange = ({target}) =>{
+            setIndex(target.value)
+        }
+
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <select onChange={onChange}>
+                    <option value="xx">Select Your Units</option>
+                    <option value="0">Time</option>
+                    <option value="1">Distance</option>
+                </select>
+                <hr />
+                {index === "xx"? "Select Units" : null}
+                {index === "0"? <TimeConverter /> : null}
+                {index === "1"? <DistanceConverter /> : null}
+            </div>
+        )
+    }
+
+    const Button = (props) => {
+        console.log(`${props.text} was rendered`)
+        return (
+            <button
+            style={{
+                backgroundColor: "tomato", 
+                color: "white", 
+                padding: "10px 20px",
+                border: 0,
+                borderRadius: 10,
+                margin: "3px"
+            }}
+            onClick={props.onClick}
+            >
+            {props.text}
+            </button>
+        )
+    }
+    const MemorizedBtn = React.memo(Button)
+    const App = () =>{
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => {
+            setValue("Revert Changes")
+        }
+        return (
+            <div>
+                <MemorizedBtn text = {value} onClick={changeValue}/>
+                <MemorizedBtn text = "Continue"/>    
+            </div>
+        )
+    }
+    ReactDOM.render(<App />, document.getElementById("root"))
+</script>
+</html>
