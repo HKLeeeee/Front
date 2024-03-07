@@ -1,5 +1,5 @@
 import React from "react";
-import AWS from "aws-sdk";
+import S3 from "../apis/myS3.ts"
 
 type uploadProps = {
     setImageSrc : React.Dispatch<React.SetStateAction<string[]>>
@@ -9,13 +9,6 @@ function ImageUpload(props: uploadProps) {
     const handelFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             const file = event.target.files[0]
-            AWS.config.update({
-                accessKeyId: import.meta.env.VITE_ACCESSKEY,
-                secretAccessKey: import.meta.env.VITE_SECRETKEY,
-                region: 'ap-northeast-2'
-            });
-
-            const s3 = new AWS.S3();
             const fileName = file.name;
             const fileKey = 'images/' + fileName; // S3에 저장될 경로
 
@@ -27,7 +20,7 @@ function ImageUpload(props: uploadProps) {
                 ContentType: file.type
             };
 
-            s3.upload(params, function (err: Error, data: any) {
+            S3.upload(params, function (err: Error, data: any) {
                 if (err) {
                     console.error('S3 업로드 오류:', err);
                     return;
