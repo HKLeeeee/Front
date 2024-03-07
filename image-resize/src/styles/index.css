@@ -18,3 +18,28 @@
 .imageContainer:hover {
   filter: drop-shadow(0.5rem 0.5rem 0.5rem gray);
 }
+
+.inputLabel {
+  display: inline-block;
+  padding: .5em .75em;
+  line-height: normal;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: .25em;
+  background-color: #feb204;
+}
+
+.inputLabel:hover {
+  background-color: #ff8503;
+}
+
+input[type="file"] {  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
