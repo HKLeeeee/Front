@@ -14,3 +14,7 @@
   /*-webkit-font-smoothing: antialiased;*/
   /*-moz-osx-font-smoothing: grayscale;*/
 }
+
+.imageContainer:hover {
+  filter: drop-shadow(0.5rem 0.5rem 0.5rem gray);
+}
