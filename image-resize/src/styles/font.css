@@ -1,0 +1,11 @@
+.regular {
+    font-family: "Gowun Batang", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bold {
+    font-family: "Gowun Batang", serif;
+    font-weight: 1000;
+    font-style: normal;
+}
