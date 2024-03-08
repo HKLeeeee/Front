@@ -1,11 +1,12 @@
 const myS3 = require("./myS3");
 const { ListObjectsCommand } = require("@aws-sdk/client-s3");
 require("dotenv").config();
+const bucketName = process.env.BUCKET;
 
 const s3Service = {
   getList: async () => {
     const params = {
-      Bucket: process.env.BUCKET,
+      Bucket: bucketName,
       Prefix: "images",
     };
     try {
@@ -17,7 +18,7 @@ const s3Service = {
         return [];
       }
       const urls = data.map((item) => {
-        return `https://${this.bucketName}.s3.amazonaws.com/${item.Key}`;
+        return `https://${bucketName}.s3.amazonaws.com/${item.Key}`;
       });
       return urls;
     } catch (e) {
@@ -27,7 +28,7 @@ const s3Service = {
   },
   getThumbnail: async () => {
     const params = {
-      Bucket: process.env.BUCKET,
+      Bucket: bucketName,
       Prefix: "thumbnails",
     };
     try {
@@ -39,7 +40,7 @@ const s3Service = {
         return [];
       }
       const urls = data.map((item) => {
-        return `https://${this.bucketName}.s3.amazonaws.com/${item.Key}`;
+        return `https://${bucketName}.s3.amazonaws.com/${item.Key}`;
       });
       return urls;
     } catch (e) {
