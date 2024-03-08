@@ -27,7 +27,7 @@ export const handler = async (event, context) => {
     event.Records[0].s3.object.key.replace(/\+/g, " ")
   );
 
-  const distKey = "resized/" + srcKey.split('/').at(-1);
+  const distKey = "resized/" + srcKey.split("/").at(-1);
 
   // Infer the image type from the file suffix
   const typeMatch = srcKey.match(/\.([^.]*)$/);
@@ -38,7 +38,7 @@ export const handler = async (event, context) => {
 
   // Check that the image type is supported
   const imageType = typeMatch[1].toLowerCase();
-  if (imageType != "jpg" && imageType != "png") {
+  if (!["jpeg", "jpg", "png", "webp", "svg"].includes(imageType)) {
     console.log(`Unsupported image type: ${imageType}`);
     return;
   }
