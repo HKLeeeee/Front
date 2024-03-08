@@ -17,6 +17,7 @@ const s3Service = {
         console.log("No Images on S3");
         return [];
       }
+      data.sort((a, b) => a.LastModified - b.LastModified);
       const urls = data.map((item) => {
         return `https://${bucketName}.s3.amazonaws.com/${item.Key}`;
       });
@@ -39,6 +40,7 @@ const s3Service = {
         console.log("No Images on S3");
         return [];
       }
+      data.sort((a, b) => a.LastModified - b.LastModified);
       const urls = data.map((item) => {
         return `https://${bucketName}.s3.amazonaws.com/${item.Key}`;
       });

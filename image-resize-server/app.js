@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 const whitelist = [
-  "http://localhost:4173",
+  "http://localhost:3000",
   "http://localhost:5173",
   "http://hkfirstbucket.s3-website.ap-northeast-2.amazonaws.com",
 ];

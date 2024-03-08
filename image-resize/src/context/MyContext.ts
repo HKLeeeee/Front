@@ -6,6 +6,6 @@ interface ContextProps {
   }
 
 export const MyContext = createContext<ContextProps>({
-    isThumbnail: true,
+    isThumbnail: false,
     setThumbnail: () => {}
 });
