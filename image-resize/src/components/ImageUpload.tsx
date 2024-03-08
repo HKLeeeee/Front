@@ -1,5 +1,6 @@
 import React from "react";
-import S3 from "../apis/myS3.ts"
+// import myS3 from "../apis/myS3.ts"
+// import AWS from "aws-sdk";
 
 type uploadProps = {
     setImageSrc : React.Dispatch<React.SetStateAction<string[]>>
@@ -7,6 +8,8 @@ type uploadProps = {
 function ImageUpload(props: uploadProps) {
 
     const handelFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target)
+        props.setImageSrc(["hello"])
         if (event.target.files && event.target.files.length > 0) {
             const file = event.target.files[0]
             const fileName = file.name;
@@ -20,7 +23,7 @@ function ImageUpload(props: uploadProps) {
                 ContentType: file.type
             };
 
-            S3.upload(params, function (err: Error, data: any) {
+            myS3.upload(params, (err: Error, data: AWS.S3.ManagedUpload.SendData) => {
                 if (err) {
                     console.error('S3 업로드 오류:', err);
                     return;

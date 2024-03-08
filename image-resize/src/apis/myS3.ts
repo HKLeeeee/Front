@@ -6,6 +6,6 @@ AWS.config.update({
     region: 'ap-northeast-2'
 });
 
-const S3 = new AWS.S3();
+const myS3 = new AWS.S3();
 
-export default S3;
+export default myS3;
