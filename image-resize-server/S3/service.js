@@ -29,7 +29,7 @@ const s3Service = {
   getThumbnails: async () => {
     const params = {
       Bucket: bucketName,
-      Prefix: "thumbnails",
+      Prefix: "resized",
     };
     try {
       const command = new ListObjectsCommand(params);

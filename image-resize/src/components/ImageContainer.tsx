@@ -1,10 +1,12 @@
 import { getList, getThumbNails } from "../apis/s3.ts";
 import ImageEach from "./ImageEach.tsx";
 import ImageUpload from "./ImageUpload.tsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { MyContext } from "../context/MyContext";
 
 function ImageContainer() {
-  const [isThumbnail, setIsThumbnail] = useState<boolean>(false);
+  const { isThumbnail } = useContext(MyContext);
+
   const [image_src, setImageSrc] = useState<string[]>([]);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ function ImageContainer() {
     } else {
       getList().then((res) => setImageSrc(res));
     }
-  }, []);
+  }, [isThumbnail]);
 
   const image_components = image_src.map((s, idx) => {
     return <ImageEach src={s} key={idx} />;
