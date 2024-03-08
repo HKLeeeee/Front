@@ -14,7 +14,6 @@ const s3Service = {
       const data = result.Contents;
       if (!data) return console.log("No Images on S3");
       const urls = data.map((item) => {
-        console.log(item);
         return `https://${this.bucketName}.s3.amazonaws.com/${item.Key}`;
       });
       return urls;
