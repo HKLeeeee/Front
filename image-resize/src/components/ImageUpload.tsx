@@ -8,11 +8,12 @@ function ImageUpload({ setImageSrc }: uploadProps) {
   const handelFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log(event.target);
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       const result = await upload(file);
-      setImageSrc((prev) => [...prev, result.image]);
+      if (result) {
+        setImageSrc((prev) => [...prev, result.image]);
+      }
     }
   };
 

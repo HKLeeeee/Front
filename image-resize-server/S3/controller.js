@@ -6,8 +6,8 @@ const s3Controller = {
     if (result instanceof Error) return next(result);
     return res.json(result);
   },
-  getThumbnail: async (req, res, next) => {
-    const result = await s3Service.getThumbnail();
+  getThumbnails: async (req, res, next) => {
+    const result = await s3Service.getThumbnails();
     if (result instanceof Error) return next(result);
     return res.json(result);
   },

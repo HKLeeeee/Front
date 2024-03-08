@@ -26,7 +26,7 @@ const s3Service = {
       return e;
     }
   },
-  getThumbnail: async () => {
+  getThumbnails: async () => {
     const params = {
       Bucket: bucketName,
       Prefix: "thumbnails",

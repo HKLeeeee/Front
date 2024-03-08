@@ -5,8 +5,8 @@ const s3Controller = require("../S3/controller");
 
 router.get("/getList", s3Controller.getList);
 
-router.get("/getThumbnail", s3Controller.getThumbnail);
+router.get("/getThumbnails", s3Controller.getThumbnails);
 
-router.post("/upload", upload.single("images"), s3Controller.upload);
+router.post("/upload", upload.single("image"), s3Controller.upload);
 
 module.exports = router;
