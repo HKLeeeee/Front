@@ -3,7 +3,7 @@ import axios from "axios";
 type ImageUploadResponseDto = {
     "image": string
 }
-const host = import.meta.env.PROD? "remoteserver" : "http://localhost:3000";
+const host = import.meta.env.PROD? "http://ec2-3-35-26-126.ap-northeast-2.compute.amazonaws.com:3000" : "http://localhost:3000";
 
 const getList = async (): Promise<string[]> => {
     try {
@@ -23,6 +23,7 @@ const getList = async (): Promise<string[]> => {
 const getThumbNails = async (): Promise<string[]>  => {
     try {
         const result = await axios.get(`${host}/s3/getThumbnails`)
+        console.log(result.status)
         if (result.status === 200) {
             return result.data;
         } else {
